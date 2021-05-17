@@ -1,6 +1,7 @@
 from application import db
+from datetime import date
 
-class Customers(db.Models):
+class Customers(db.Model):
     customer_id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
@@ -12,10 +13,11 @@ class Customers(db.Models):
     county = db.Column(db.String(100), nullable=False)
     postcode = db.Column(db.String(10), nullable=False)
 
-class tasks:
+class Tasks(db.Model):
     task_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
     desc = db.Column(db.String(200), nullable=False)
-    est_time = db.Column(db.Time, nullable=False)
+    est_time = db.Column(db.Float(10,2), nullable=False)
     price_ph = db.Column(db.Float(10,2), nullable=False)
 
 

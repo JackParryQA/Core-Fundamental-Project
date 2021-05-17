@@ -1,0 +1,18 @@
+<html>
+    <body>
+        <div style="display: inline-block;">
+            <a href="{{ url_for('Index') }}">Home</a>
+        </div>
+        <div style="display: inline-block;">
+            <a href="{{ url_for('AddCustomer') }}">Add Customer</a>
+        </div>
+        <div style="display: inline-block;">
+            <a href="{{ url_for('AddTask') }}">Add Task</a>
+        </div>
+        <div style="display: inline-block;">
+            <a href="{{ url_for('AddJob') }}">Add Job</a>
+        </div>
+        {% block body %}
+        {% endblock body %}
+    </body>
+</html>

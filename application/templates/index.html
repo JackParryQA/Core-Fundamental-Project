@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>Job Tracker</title>
+    </head>
+
+    <body>
+        {% extends 'layout.html' %}
+        {% block body %}
+            <br><br>
+            {% for i in all_jobs %}
+                <div>
+                    {% set customer = Customers.get(id=i.customer_id) %}
+                    <p>Customer: {{ customer.first_name }} {{ customer.last_name }}</p>
+                </div>
+            {% endfor %}
+        {% endblock body %}
+    </body>
+</html>
