@@ -26,7 +26,8 @@ class Jobs(db.Model):
     customer_id = db.Column(db.Integer, db.ForeignKey('customers.customer_id'), nullable=False)
     task_id = db.Column(db.Integer, db.ForeignKey('tasks.task_id'), nullable=False)
     start_date = db.Column(db.Date, nullable=False, default=date.today())
-    finish_date = db.Column(db.Date, nullable=True)
+    # finish_date = db.Column(db.Date, nullable=True)
+    complete = db.Column(db.Boolean, nullable=False)
     materials_used = db.relationship('MaterialsUsed', backref='job')
     total_price = db.Column(db.Float(10,2), nullable=False, default=0.00)                 #need to look how to add price from task and materialsused tables
 

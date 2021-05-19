@@ -7,10 +7,49 @@
         {% extends 'layout.html' %}
         {% block body %}
             <br><br>
-            {% for i in all_jobs %}
+            {% for i in jobs %}
                 <div>
-                    {% set customer = Customers.get(id=i.customer_id) %}
-                    <p>Customer: {{ customer.first_name }} {{ customer.last_name }}</p>
+                    <p>Job ID: {{ i.job_id }}</p> 
+
+                    {% set customer = namespace(c=[]) %}
+                    {% for j in customers %}
+                        {% if i.customer_id == j.customer_id %}
+                            {% set customer.c = j %}
+                        {% endif %}
+                    {% endfor %}
+                    {% set c = customer.c %}
+                    <p>Customer: {{ c.first_name }} {{ c.last_name }}</p>
+
+                    {% set task = namespace(t=[]) %}
+                    {% for j in tasks %}
+                        {% if i.task_id == j.task_id %}
+                            {% set task.t = j %}
+                        {% endif %}
+                    {% endfor %}
+                    {% set t = task.t %}
+                    <p>Task: {{ t.name }}</p>
+
+                    <p>Start Date: {{ i.start_date }}</p>
+
+                    <p>Complete: {{ i.complete }}</p>
+
+                    <p>Total Price: £{{ i.total_price }} </p>
+
+                    <form action="{{ url_for('AddMaterialsUsed', job_id=i.job_id) }}" style="display: inline-block;">
+                        <input type="submit" value="Add Materials Used">
+                    </form>
+
+                    <form action="{{ url_for('ShowMatsUsed', job_id = i.job_id) }}" style="display: inline-block;">
+                        <input type="submit" value="Show Materials Used">
+                    </form>
+                    
+                    <form action="{{ url_for('EditJob', id=i.job_id) }}" style="display: inline-block;">
+                        <input type="submit" value="Edit Job">
+                    </form>
+
+                    <form action="{{ url_for('Delete',tdb='Jobs',id=i.job_id) }}" style="display: inline-block;">
+                        <input type="submit" value="Delete">
+                    </form>
                 </div>
             {% endfor %}
         {% endblock body %}

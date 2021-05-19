@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Edit Customer</title>
+    </head>
+
+    <body>
+        {% extends 'layout.html' %}
+        {% block body %}
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <br>
+                Customer ID: {{ id }}
+                <br><br>
+                {{ form.first_name.label }} {{ form.first_name }}
+                <br><br>
+                {{ form.last_name.label }} {{ form.last_name }}
+                <br><br>
+                {{ form.email.label }} {{ form.email }}
+                <br><br>
+                {{ form.home_num.label }} {{ form.home_num }}
+                <br><br>
+                {{ form.mobile_num.label }} {{ form.mobile_num }}
+                <br><br>
+                {{ form.address.label }} {{ form.address }}
+                <br><br>
+                {{ form.town_city.label }} {{ form.town_city }}
+                <br><br>
+                {{ form.county.label }} {{ form.county }}
+                <br><br>
+                {{ form.postcode.label }} {{ form.postcode }}
+                <br><br>
+                {{ form.submit }}
+            </form>
+        {% endblock body %}
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Show Materials Used - Job ID {{ job_id }}</title>
+    </head>
+
+    <body>
+        {% extends 'layout.html' %}
+        {% block body %}
+            <form method="POST" action="">
+                {% for i in matsused %} <!-- MaterialsUsed table -->
+                    {% for j in mats %} <!-- Materials table -->
+                        {% if i.material_id==j.material_id %}
+                            <p>Material ID: {{ j.material_id }} </p>
+                            <p>Name:        {{ j.name }} </p>
+                            <p>Description: {{ j.desc }} </p>
+                            <p>Price per:   {{ j.price }} </p>
+                            <p>Quantity:    {{ i.quantity }} </p>
+                            {% set total = j.price*i.quantity %}
+                            <p>Total Price: {{ total }} </p>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+
+            </form>
+        {% endblock body %}
+    </body>
+</html>

@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>Customers</title>
+    </head>
+
+    <body>
+        {% extends 'layout.html' %}
+        {% block body %}
+            <br><br>
+            {% for i in customers %}
+                <div>
+                    <p>Customer ID: {{ i.customer_id }} </p>
+                    <p>First name:  {{ i.first_name }} </p>
+                    <p>Last Name:   {{ i.last_name }} </p>
+                    <p>Email:       {{ i.email }} </p>
+                    <p>Home No.     {{ i.home_num }} </p>
+                    <p>Mobile No.   {{ i.mobile_num }} </p>
+                    <p>Address:     {{ i.address }} </p>
+                    <p>Town/City:   {{ i.town_city }} </p>
+                    <p>County:      {{ i.county }} </p>
+                    <p>Postcode:    {{ i.postcode }} </p>
+                    <form action="{{ url_for('EditCustomer', id=i.customer_id) }}">
+                        <input type="Submit" value="Edit Customer">
+                    </form>
+                </div>
+            {% endfor %}
+        {% endblock body %}
+    </body>
+</html>
+    

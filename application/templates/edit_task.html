@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Add Task</title>
+        <title>Edit Task</title>
     </head>
 
     <body>
@@ -8,8 +8,9 @@
         {% block body %}
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
-                {{ form.csrf_token }}
                 <br>
+                Task ID: {{ id }}
+                <br><br>
                 {{ form.name.label }} {{ form.name }}
                 <br><br>
                 {{ form.desc.label }} {{ form.desc }}
@@ -22,4 +23,4 @@
             </form>
         {% endblock body %}
     </body>
-</html>
+</html> 

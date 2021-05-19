@@ -15,6 +15,15 @@
         <div style="display: inline-block;">
             <a href="{{ url_for('AddMaterial') }}">Add Material</a>
         </div>
+        <div style="display: inline-block;">
+            <a href="{{ url_for('ShowCustomers') }}">Customers</a>
+        </div>
+        <div style="display: inline-block;">
+            <a href="{{ url_for('ShowTasks') }}">Tasks</a>
+        </div>
+        <div style="display: inline-block;">
+            <a href="{{ url_for('ShowMats') }}">Materials</a>
+        </div>
         {% block body %}
         {% endblock body %}
     </body>

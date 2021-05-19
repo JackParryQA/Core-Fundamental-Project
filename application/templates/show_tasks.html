@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>Show Materials - Job ID {{ job_id }}</title>
+    </head>
+
+    <body>
+        {% extends 'layout.html' %}
+        {% block body %}
+            {% for i in tasks %}
+                <p>Task ID:        {{ i.task_id }}</p>
+                <p>Name:           {{ i.name }} </p>
+                <p>Description:    {{ i.desc }} </p>
+                <p>Est Time:       {{ i.est_time }} </p>
+                <p>Price Per Hour: {{ i.price_ph }} </p>
+                <form action="{{ url_for('EditTask', id=i.task_id) }}">
+                    <input type="submit" value="Edit Task">
+                </form>
+            {% endfor %}
+        {% endblock body %}
+    </body>
+</html>
