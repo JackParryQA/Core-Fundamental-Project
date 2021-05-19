@@ -1,5 +1,4 @@
-from application.forms import AddCustomerForm, AddJobForm, AddTaskForm
-from logging import error
+from application.forms import AddCustomerForm, AddJobForm, AddMaterialForm, AddTaskForm
 from flask import render_template, request, redirect, url_for
 from application import app,db
 from application.models import Customers, Tasks, Jobs, Materials, MaterialsUsed
@@ -27,6 +26,7 @@ def AddCustomer():
         postcode = form.postcode.data
 
         if form.validate_on_submit():
+            print('hello')
             new_customer = Customers(
                 first_name=first_name,
                 last_name=last_name,
@@ -66,29 +66,66 @@ def AddTask():
 
     return render_template('add_task.html', form = form)
 
+# def SelectCustomers():
+#     return Customers.query
 
 @app.route('/add job',  methods=['GET', 'POST'])
 def AddJob():
+    all_customers=Customers.query.all()
+    customer_ids = list()
+    for i in all_customers:
+        customer_ids.append(i.customer_id)
+
+    all_tasks=Tasks.query.all()
+    task_ids = list()
+    for i in all_tasks:
+        task_ids.append(i.task_id)
+
     form = AddJobForm()
-    # all_customers=Customers.query.all()
-    # all_tasks=Tasks.query.all()
+    form.customer.choices=customer_ids
+    form.task.choices=task_ids
+    # form.customer.query_factory=SelectCustomers
 
     if request.method == 'POST':
         customer_id = form.customer.data
-        customer_id = customer_id.split()
-        customer_id = customer_id[0]
         task_id = form.task.data
-        task_id = task_id.split()
-        task_id = task_id[0]
-
+        start_date = form.start_date.data
+        finish_date = form.finish_date.data
+        total_price = form.total_price.data##############
+        
         if form.validate_on_submit():
             new_job = Jobs(
                 customer_id=customer_id,
-                task_id=task_id
+                task_id=task_id,
+                start_date=start_date,
+                finish_date=finish_date,
+                total_price=total_price
             )
-            db.session.add(new_job)
             print(new_job)
+            
+            db.session.add(new_job)
             db.session.commit()
             return redirect(url_for('Index'))
-            
-    return render_template('add_job.html', form = form)#, all_customers=all_customers, all_tasks=all_tasks)
+    return render_template('add_job.html', form = form)
+
+@app.route('/add material', methods=['GET','POST'])
+def AddMaterial():
+    form = AddMaterialForm()
+    if request == 'POST':
+        name = form.name.data
+        desc = form.desc.data
+        supplier = form.supplier.data
+        price = form.price.data
+
+        if form.validate_on_submit():
+            new_mat = Materials(
+                name = name,
+                desc = desc,
+                supplier = supplier,
+                price = price
+            )
+            db.session.add(new_mat)
+            db.session.commit()
+            return redirect(url_for('AddTask'))
+
+    return render_template('add_material.html', form = form)

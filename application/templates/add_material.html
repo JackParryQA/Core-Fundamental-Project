@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>Add Material</title>
+    </head>
+
+    <body>
+        {% extends 'layout.html' %}
+        {% block body %}
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                {{ form.csrf_token }}
+                <br>
+                {{ form.name.label }} {{ form.name }}
+                <br><br>
+                {{ form.desc.label }} {{ form.desc }}
+                <br><br>
+                {{ form.supplier.label }} {{ form.supplier }}
+                <br><br>
+                {{ form.price.label }} {{ form.price }}
+                <br><br>
+                {{ form.submit }}
+            </form>
+        {% endblock body %}
+    </body>
+</html>

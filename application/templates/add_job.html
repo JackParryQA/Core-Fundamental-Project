@@ -9,9 +9,18 @@
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
                 <br>
-                {{ form.customer.label }} {{ form.customer }}
+                <div>
+                    {{ form.customer.label }}  {{ form.customer }}
+                </div>
                 <br><br>
                 {{ form.task.label }} {{ form.task }}
+                <br><br>
+                {{ form.start_date.label }} {{ form.start_date }}
+                <br><br>
+                {{ form.finish_date.label }} {{ form.finish_date }}
+                <br><br>
+                <!-- add form for adding materials -->
+                {{ form.total_price.label }} {{ form.total_price }}
                 <br><br>
                 {{ form.submit }}
             </form>
