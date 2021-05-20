@@ -6,31 +6,23 @@
     <body>
         {% extends 'layout.html' %}
         {% block body %}
-            <form method="POST" action="">
-                {{ form.hidden_tag() }}
-                <br>
-                Customer ID: {{ id }}
-                <br><br>
-                {{ form.first_name.label }} {{ form.first_name }}
-                <br><br>
-                {{ form.last_name.label }} {{ form.last_name }}
-                <br><br>
-                {{ form.email.label }} {{ form.email }}
-                <br><br>
-                {{ form.home_num.label }} {{ form.home_num }}
-                <br><br>
-                {{ form.mobile_num.label }} {{ form.mobile_num }}
-                <br><br>
-                {{ form.address.label }} {{ form.address }}
-                <br><br>
-                {{ form.town_city.label }} {{ form.town_city }}
-                <br><br>
-                {{ form.county.label }} {{ form.county }}
-                <br><br>
-                {{ form.postcode.label }} {{ form.postcode }}
-                <br><br>
-                {{ form.submit }}
-            </form>
+            <h1>Edit Customer</h1>
+            <table>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <tr><td> Customer ID:               </td><td>{{ id }}</td></tr>
+                    <tr><td>{{ form.first_name.label }} </td><td>{{ form.first_name }}</td></tr> 
+                    <tr><td>{{ form.last_name.label }}  </td><td>{{ form.last_name }}</td></tr> 
+                    <tr><td>{{ form.email.label }}      </td><td>{{ form.email }}</td></tr> 
+                    <tr><td>{{ form.home_num.label }}   </td><td>{{ form.home_num }}</td></tr> 
+                    <tr><td>{{ form.mobile_num.label }}</td><td>{{ form.mobile_num }}</td></tr> 
+                    <tr><td>{{ form.address.label }} </td><td>{{ form.address }}</td></tr>
+                    <tr><td>{{ form.town_city.label }}</td><td>{{ form.town_city }}</td></tr> 
+                    <tr><td>{{ form.county.label }}</td><td>{{ form.county }}</td></tr> 
+                    <tr><td>{{ form.postcode.label }}</td><td>{{ form.postcode }}</td></tr> 
+                    <tr><td>{{ form.submit }}</td></tr>
+                </form>
+            </table>
         {% endblock body %}
     </body>
 </html>

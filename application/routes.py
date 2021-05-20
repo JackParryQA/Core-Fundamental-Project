@@ -1,4 +1,4 @@
-from application.forms import AddCustomerForm, AddJobForm, AddMatUsedForm, AddMaterialForm, AddTaskForm
+from application.forms import AddCustomerForm, AddJobForm, AddMatUsedForm, AddMaterialForm, AddTaskForm, EditMaterialUsedForm
 from flask import render_template, request, redirect, url_for
 from application import app,db
 from application.models import Customers, Tasks, Jobs, Materials, MaterialsUsed
@@ -39,7 +39,7 @@ def AddCustomer():
                 postcode=postcode)
             db.session.add(new_customer)
             db.session.commit()
-            return redirect(url_for('Index'))
+            return redirect(url_for('ShowCustomers'))
         
     return render_template('add_customer.html', form = form)
 
@@ -62,7 +62,7 @@ def AddTask():
             )
             db.session.add(new_task)
             db.session.commit()
-            return redirect(url_for('Index'))
+            return redirect(url_for('ShowTasks'))
 
     return render_template('add_task.html', form = form)
 
@@ -81,13 +81,12 @@ def AddJob():
     form = AddJobForm()
     form.customer.choices=customers
     form.task.choices=task_ids
-    form.complete.choices=((False,False),(True,True))
+    form.complete.choices=(((False,False)),((True,True)))
     if request.method == 'POST':
         customer_id = form.customer.data
         task_id = form.task.data
         start_date = form.start_date.data
         complete = bool(form.complete.data)
-        print(complete)
         temp=Tasks.query.get(task_id)
         total_price = temp.est_time*temp.price_ph
         if form.validate_on_submit():
@@ -98,7 +97,6 @@ def AddJob():
                 complete=complete,
                 total_price=total_price
             )
-            
             db.session.add(new_job)
             db.session.commit()
             return redirect(url_for('Index'))
@@ -151,7 +149,7 @@ def AddMaterialsUsed(job_id):
     return render_template('materials_used.html', form=form, job_id=job_id)
 
 
-@app.route('/show materials used/<int:job_id>')
+@app.route('/show materials used/<int:job_id>', methods=['GET', 'POST'])
 def ShowMatsUsed(job_id):
     all_matsused = MaterialsUsed.query.filter_by(job_id=job_id).all()
     all_mats = Materials.query.all()
@@ -272,7 +270,7 @@ def EditJob(id):
     form = AddJobForm()
     form.customer.choices=customers
     form.task.choices=task_ids
-    form.complete.choices=((False,'False'),(True,'True'))
+    form.complete.choices=((False,False),(True,True))
     job=Jobs.query.get(id)
     
 
@@ -298,9 +296,25 @@ def EditJob(id):
         # form.total_price=job.total_price
     return render_template('edit_job.html', form=form, id=id, price=job.total_price)
 
-@app.route('/edit materials used/<int:id>')
-def EditMatsUsed():
-    form=AddMatUsedForm()
+@app.route('/edit materials used/<int:id>', methods=['GET', 'POST'])
+def EditMatsUsed(id):
+    form=EditMaterialUsedForm()
+    mats=MaterialsUsed.query.get(id)
+    job=Jobs.query.get(id)
+    mat=Materials.query.get(mats.material_id)
+    if request.method=='POST':
+        quantity=form.quantity.data
+        print(quantity)
+        price=quantity*mat.price
+        print(price)
+        if form.validate_on_submit():
+            mats.quantity=quantity
+            mats.price=price
+            db.session.commit()
+            return redirect(url_for('ShowMatsUsed',job_id=id))
+    elif request.method=='GET':
+        form.quantity.data=mats.quantity
+    return render_template('edit_matsused.html', form=form,mat=mat,job=job,mats=mats)
 
 
 
@@ -320,6 +334,9 @@ def Delete(tdb,id):
         return redirect(url_for('ShowTasks'))
     elif tdb=='Materials':
         target=Materials.query.get(id)
+        mats_used=MaterialsUsed.query.filter_by(material_id=id)
+        for i in mats_used:
+            db.session.delete(i)
         db.session.delete(target)
         db.session.commit()
         return redirect(url_for('ShowMats'))
@@ -328,9 +345,12 @@ def Delete(tdb,id):
         job_id=target.job_id
         db.session.delete(target)
         db.session.commit()
-        return redirect(url_for('UpdateJobPrice',type='del',id=job_id))
-    else:
+        return redirect(url_for('ShowMatsUsed',job_id=job_id))
+    elif tdb=='Jobs':
         target=Jobs.query.get(id)
+        mats_used=MaterialsUsed.query.filter_by(job_id=target.job_id)
+        for i in mats_used:
+            db.session.delete(i)
         db.session.delete(target)
         db.session.commit()
         return redirect(url_for('Index'))
@@ -348,8 +368,9 @@ def UpdateJobPrice(type,id):
                 total_price+=i.quantity*j.price
     job.total_price=total_price+(task.est_time*task.price_ph)
     db.session.commit()
-    if type=='del' or type=='upd':
+    if type=='del' :
         return redirect(url_for('ShowMatsUsed',job_id=id))
     elif type=='add':
         return redirect(url_for('Index'))
-    
+    elif type=='upd':
+        return redirect(url_for('ShowMats'))

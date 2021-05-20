@@ -1,4 +1,5 @@
 from datetime import date
+from flask.app import Flask
 from sqlalchemy.orm import query
 from wtforms.fields.core import DateField, DecimalField, IntegerField
 from application.models import Customers, Materials, Tasks
@@ -43,5 +44,9 @@ class AddMaterialForm(FlaskForm):
 
 class AddMatUsedForm(FlaskForm):
     material_id = SelectField('Material:')
+    quantity = IntegerField('Quantity:', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+class EditMaterialUsedForm(FlaskForm):
     quantity = IntegerField('Quantity:', validators=[DataRequired()])
     submit = SubmitField('Submit')

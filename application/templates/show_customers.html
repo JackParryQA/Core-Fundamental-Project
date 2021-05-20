@@ -6,22 +6,34 @@
     <body>
         {% extends 'layout.html' %}
         {% block body %}
-            <br><br>
+            <h1>Customers</h1>
             {% for i in customers %}
-                <div>
-                    <p>Customer ID: {{ i.customer_id }} </p>
-                    <p>First name:  {{ i.first_name }} </p>
-                    <p>Last Name:   {{ i.last_name }} </p>
-                    <p>Email:       {{ i.email }} </p>
-                    <p>Home No.     {{ i.home_num }} </p>
-                    <p>Mobile No.   {{ i.mobile_num }} </p>
-                    <p>Address:     {{ i.address }} </p>
-                    <p>Town/City:   {{ i.town_city }} </p>
-                    <p>County:      {{ i.county }} </p>
-                    <p>Postcode:    {{ i.postcode }} </p>
-                    <form action="{{ url_for('EditCustomer', id=i.customer_id) }}">
-                        <input type="Submit" value="Edit Customer">
-                    </form>
+                <div style=" display: inline-block;padding: 5px;">
+                    <table style='border: 1px solid black;'>
+                        <tr><td style='padding: 5px;'>Customer ID: </td><td style='padding: 5px;'> {{ i.customer_id }} </td></tr>
+                        <tr><td style='padding: 5px;'>First name:  </td><td style='padding: 5px;'> {{ i.first_name }} </td></tr>
+                        <tr><td style='padding: 5px;'>Last Name:   </td><td style='padding: 5px;'> {{ i.last_name }} </td></tr>
+                        <tr><td style='padding: 5px;'>Email:       </td><td style='padding: 5px;'> {{ i.email }} </td></tr>
+                        <tr><td style='padding: 5px;'>Home No.     </td><td style='padding: 5px;'> {{ i.home_num }} </td></tr>
+                        <tr><td style='padding: 5px;'>Mobile No.   </td><td style='padding: 5px;'> {{ i.mobile_num }} </td></tr>
+                        <tr><td style='padding: 5px;'>Address:     </td><td style='padding: 5px;'> {{ i.address }} </td></tr>
+                        <tr><td style='padding: 5px;'>Town/City:   </td><td style='padding: 5px;'> {{ i.town_city }}</td></tr>
+                        <tr><td style='padding: 5px;'>County:      </td><td style='padding: 5px;'> {{ i.county }} </td></tr>
+                        <tr><td style='padding: 5px;'>County:      </td><td style='padding: 5px;'> {{ i.county }} </td></tr>
+                        <tr><td style='padding: 5px;'>Postcode:    </td><td style='padding: 5px;'> {{ i.postcode }} </td></tr>
+                        <tr>
+                            <td style='padding: 5px;'>
+                                <form action="{{ url_for('EditCustomer', id=i.customer_id) }}">
+                                    <input type="Submit" value="Edit Customer">
+                                </form> 
+                            </td>
+                            <td style='padding: 5px;'>
+                                <form action="{{ url_for('Delete',tdb='Customers',id=i.customer_id) }}" style="display: inline-block;">
+                                    <input type="submit" value="Delete">
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             {% endfor %}
         {% endblock body %}

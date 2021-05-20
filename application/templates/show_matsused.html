@@ -6,17 +6,32 @@
     <body>
         {% extends 'layout.html' %}
         {% block body %}
+            <h1>Materials Used</h1>
             <form method="POST" action="">
                 {% for i in matsused %} <!-- MaterialsUsed table -->
                     {% for j in mats %} <!-- Materials table -->
                         {% if i.material_id==j.material_id %}
-                            <p>Material ID: {{ j.material_id }} </p>
-                            <p>Name:        {{ j.name }} </p>
-                            <p>Description: {{ j.desc }} </p>
-                            <p>Price per:   {{ j.price }} </p>
-                            <p>Quantity:    {{ i.quantity }} </p>
-                            {% set total = j.price*i.quantity %}
-                            <p>Total Price: {{ total }} </p>
+                            <table  style='border: 1px solid black;'>
+                                <tr><td style='padding: 5px;'>Material ID: </td><td style='padding: 5px;'> {{ j.material_id }} </td></tr>
+                                <tr><td style='padding: 5px;'>Name:        </td><td style='padding: 5px;'> {{ j.name }} </td></tr>
+                                <tr><td style='padding: 5px;'>Description: </td><td style='padding: 5px;'> {{ j.desc }} </td></tr>
+                                <tr><td style='padding: 5px;'>Price per:   </td><td style='padding: 5px;'> {{ j.price }}</td></tr>
+                                <tr><td style='padding: 5px;'>Quantity:    </td><td style='padding: 5px;'> {{ i.quantity }}</td></tr>
+                                {% set total = j.price*i.quantity %}
+                                <tr><td style='padding: 5px;'>Total Price: </td><td style='padding: 5px;'> £{{ total }}</td></tr>
+                                <tr>
+                                    <td style='padding: 5px;'>
+                                        <form action="{{ url_for('Delete',tdb='MaterialsUsed',id=i.material_id) }}" style="display: inline-block;">
+                                            <input type="submit" value="Delete">
+                                        </form>
+                                    </td>
+                                    <td style='padding: 5px;'>
+                                        <form action="{{ url_for('EditMatsUsed',id=i.id) }}" style="display: inline-block;">
+                                            <input type="submit" value="Edit">
+                                        </form>
+                                    </td>
+                                </tr>
+                            </table>
                         {% endif %}
                     {% endfor %}
                 {% endfor %}

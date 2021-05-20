@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>Edit Materials Used</title>
+    </head>
+
+    <body>
+        {% extends 'layout.html' %}
+        {% block body %}
+            <h1>Add Task</h1>   
+            <table>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    {{ form.csrf_token }}
+                    <tr><td>Job:      </td><td>  {{ job.job_id }} {{ job.name }} </td></tr>
+                    <tr><td>Material: </td><td>  {{ mat.material_id }} {{ mat.name }} </td>  </tr> 
+                    <tr><td>{{ form.quantity.label }} </td><td>{{ form.quantity }} </td></tr>
+                    {% set quantity = form.quantity.data|int %}
+                    {% set price = quantity*mat.price %}
+                    <tr><td>Price: </td><td>{{ price|int }} </td></tr>
+                    <tr><td> {{ form.submit }} </td></tr>
+                </form>
+            </table>
+        {% endblock body %}
+    </body>
+</html>

@@ -1,27 +1,25 @@
 <html>
     <head>
-        <title>Add Task</title>
+        <title>Add Job</title>
     </head>
 
     <body>
         {% extends 'layout.html' %}
         {% block body %}
-            <form method="POST" action="">
-                {{ form.hidden_tag() }}
-                {{ form.csrf_token }}
-                <br>
-                {{ form.customer.label }}  {{ form.customer }}
-                <br><br>
-                {{ form.task.label }} {{ form.task }}
-                <br><br>
-                {{ form.start_date.label }} {{ form.start_date }}
-                <br><br>
-                {{ form.complete.label }} {{ form.complete }}
-                <br><br>
-                <!-- {{ form.total_price.label }} {{ form.total_price }}
-                <br><br> -->
-                {{ form.submit }}
-            </form>
+            <h1>Add Job</h1>
+            <table>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    {{ form.csrf_token }}
+                    <tr><td>{{ form.customer.label }}  </td><td> {{ form.customer }}</td></tr>
+                    <tr><td>{{ form.task.label }}      </td><td> {{ form.task }}</td></tr>
+                    <tr><td>{{ form.start_date.label }}</td><td> {{ form.start_date }}</td></tr>
+                    <tr><td>{{ form.complete.label }}  </td><td> {{ form.complete }}</td></tr>
+                    <!-- {{ form.total_price.label }} {{ form.total_price }}
+                    <br><br> -->
+                    <tr><td>{{ form.submit }}</td></tr>
+                </form>
+            </table>
         {% endblock body %}
     </body>
 </html>

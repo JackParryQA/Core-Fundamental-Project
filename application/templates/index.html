@@ -6,20 +6,23 @@
     <body>
         {% extends 'layout.html' %}
         {% block body %}
+            <h1>Jobs</h1>
             <br><br>
             {% for i in jobs %}
                 <div>
                     <p>Job ID: {{ i.job_id }}</p> 
 
-                    {% set customer = namespace(c=[]) %}
-                    {% for j in customers %}
-                        {% if i.customer_id == j.customer_id %}
-                            {% set customer.c = j %}
-                        {% endif %}
-                    {% endfor %}
-                    {% set c = customer.c %}
-                    <p>Customer: {{ c.first_name }} {{ c.last_name }}</p>
+                    <div>
+                        {% set customer = namespace(c=[]) %}
+                        {% for j in customers %}
+                            {% if i.customer_id == j.customer_id %}
+                                {% set customer.c = j %}
+                            {% endif %}
+                        {% endfor %}
+                        {% set c = customer.c %}
+                        <p>Customer: {{ c.first_name }} {{ c.last_name }}</p>
 
+                    </div>
                     {% set task = namespace(t=[]) %}
                     {% for j in tasks %}
                         {% if i.task_id == j.task_id %}
