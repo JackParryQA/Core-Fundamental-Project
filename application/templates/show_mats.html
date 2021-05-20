@@ -6,13 +6,13 @@
     <body>
         {% extends 'layout.html' %}
         {% block body %}
-            <h1>Materials</h1>
+            <h2>Materials</h2>
             {% for i in mats %}
                 <table  style='border: 1px solid black;'>
                     <tr><td style='padding: 5px;'>Material ID: </td><td style='padding: 5px;'> {{ i.material_id }} </td></tr>
                     <tr><td style='padding: 5px;'>Name:        </td><td style='padding: 5px;'> {{ i.name }} </td></tr>
                     <tr><td style='padding: 5px;'>Description: </td><td style='padding: 5px;'> {{ i.desc }} </td></tr>
-                    <tr><td style='padding: 5px;'>Price per:   </td><td style='padding: 5px;'> £{{ i.price }} </td></tr>
+                    <tr><td style='padding: 5px;'>Price per:   </td><td style='padding: 5px;'> {{ "£%.2f"|format(i.price) }} </td></tr>
                     <tr>
                         <td style='padding: 5px;'>
                             <form action="{{ url_for('EditMaterial', id=i.material_id) }}" style="display: inline-block;">

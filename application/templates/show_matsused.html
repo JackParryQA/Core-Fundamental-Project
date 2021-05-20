@@ -6,7 +6,7 @@
     <body>
         {% extends 'layout.html' %}
         {% block body %}
-            <h1>Materials Used</h1>
+            <h2>Materials Used</h2>
             <form method="POST" action="">
                 {% for i in matsused %} <!-- MaterialsUsed table -->
                     {% for j in mats %} <!-- Materials table -->
@@ -15,11 +15,16 @@
                                 <tr><td style='padding: 5px;'>Material ID: </td><td style='padding: 5px;'> {{ j.material_id }} </td></tr>
                                 <tr><td style='padding: 5px;'>Name:        </td><td style='padding: 5px;'> {{ j.name }} </td></tr>
                                 <tr><td style='padding: 5px;'>Description: </td><td style='padding: 5px;'> {{ j.desc }} </td></tr>
-                                <tr><td style='padding: 5px;'>Price per:   </td><td style='padding: 5px;'> {{ j.price }}</td></tr>
+                                <tr><td style='padding: 5px;'>Price per:   </td><td style='padding: 5px;'> {{ "£%.2f"|format(j.price) }}</td></tr>
                                 <tr><td style='padding: 5px;'>Quantity:    </td><td style='padding: 5px;'> {{ i.quantity }}</td></tr>
                                 {% set total = j.price*i.quantity %}
-                                <tr><td style='padding: 5px;'>Total Price: </td><td style='padding: 5px;'> £{{ total }}</td></tr>
+                                <tr><td style='padding: 5px;'>Total Price: </td><td style='padding: 5px;'> {{ "£%.2f"|format(total) }}</td></tr>
                                 <tr>
+                                    <td style='padding: 5px;'>
+                                        <form action="{{ url_for('ViewMaterial',id=i.material_id) }}" style="display: inline-block;">
+                                            <input type="submit" value="View Material">
+                                        </form>
+                                    </td>
                                     <td style='padding: 5px;'>
                                         <form action="{{ url_for('Delete',tdb='MaterialsUsed',id=i.material_id) }}" style="display: inline-block;">
                                             <input type="submit" value="Delete">

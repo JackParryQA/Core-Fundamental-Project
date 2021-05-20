@@ -1,3 +1,4 @@
+import re
 from application.forms import AddCustomerForm, AddJobForm, AddMatUsedForm, AddMaterialForm, AddTaskForm, EditMaterialUsedForm
 from flask import render_template, request, redirect, url_for
 from application import app,db
@@ -81,12 +82,12 @@ def AddJob():
     form = AddJobForm()
     form.customer.choices=customers
     form.task.choices=task_ids
-    form.complete.choices=(((False,False)),((True,True)))
+    # form.complete.choices=(((False,False)),((True,True)))
     if request.method == 'POST':
         customer_id = form.customer.data
         task_id = form.task.data
         start_date = form.start_date.data
-        complete = bool(form.complete.data)
+        # complete = bool(form.complete.data)
         temp=Tasks.query.get(task_id)
         total_price = temp.est_time*temp.price_ph
         if form.validate_on_submit():
@@ -94,7 +95,7 @@ def AddJob():
                 customer_id=customer_id,
                 task_id=task_id,
                 start_date=start_date,
-                complete=complete,
+                complete=False,
                 total_price=total_price
             )
             db.session.add(new_job)
@@ -270,7 +271,7 @@ def EditJob(id):
     form = AddJobForm()
     form.customer.choices=customers
     form.task.choices=task_ids
-    form.complete.choices=((False,False),(True,True))
+    # form.complete.choices=((False,False),(True,True))
     job=Jobs.query.get(id)
     
 
@@ -278,14 +279,10 @@ def EditJob(id):
         customer=form.customer.data
         task=form.task.data
         start=form.start_date.data
-        complete=bool(form.complete.data)
-        # price=form.total_price.data
         if form.validate_on_submit():
             job.customer=customer
             job.task=task
             job.start_date=start
-            job.complete=complete
-            # job.total_price=price
             db.session.commit()
             return redirect(url_for('Index'))
     elif request.method=='GET':
@@ -321,14 +318,19 @@ def EditMatsUsed(id):
 @app.route('/delete/<tdb>/<int:id>')
 def Delete(tdb,id):
     target=''
-    print(tdb)
     if tdb=='Customers':
         target=Customers.query.get(id)
+        jobs=Jobs.query.filter_by(customer_id=id)
+        for i in jobs:
+            db.session.delete(i)
         db.session.delete(target)
         db.session.commit()
         return redirect(url_for('ShowCustomers'))
     elif tdb=='Tasks':
         target=Tasks.query.get(id)
+        tasks=Jobs.query.filter_by(task_id=id)
+        for i in tasks:
+            db.session.delete(i)
         db.session.delete(target)
         db.session.commit()
         return redirect(url_for('ShowTasks'))
@@ -374,3 +376,33 @@ def UpdateJobPrice(type,id):
         return redirect(url_for('Index'))
     elif type=='upd':
         return redirect(url_for('ShowMats'))
+
+
+@app.route('/view customer/<int:id>')
+def ViewCustomer(id):
+    customer=Customers.query.get(id)
+    return render_template('view_customer.html',customer=customer)
+
+@app.route('/view task/<int:id>')
+def ViewTask(id):
+    task=Tasks.query.get(id)
+    return render_template('view_task.html',task=task)
+
+@app.route('/view material/<int:id>')
+def ViewMaterial(id):
+    mat=Materials.query.get(id)
+    return render_template('view_material.html', mat=mat)
+
+@app.route('/complete/<int:id>')
+def CompleteJob(id):
+    job=Jobs.query.get(id)
+    job.complete=True
+    db.session.commit()
+    return redirect(url_for('Index'))
+
+@app.route('/incomplete/<int:id>')
+def InCompleteJob(id):
+    job=Jobs.query.get(id)
+    job.complete=False
+    db.session.commit()
+    return redirect(url_for('Index'))

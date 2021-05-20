@@ -6,22 +6,18 @@
     <body>
         {% extends 'layout.html' %}
         {% block body %}
-            <h1>Edit Tasks</h1>
-            <form method="POST" action="">
-                {{ form.hidden_tag() }}
-                <br>
-                Task ID: {{ id }}
-                <br><br>
-                {{ form.name.label }} {{ form.name }}
-                <br><br>
-                {{ form.desc.label }} {{ form.desc }}
-                <br><br>
-                {{ form.est_time.label }} {{ form.est_time }}
-                <br><br>
-                {{ form.price_ph.label }} {{ form.price_ph }}
-                <br><br>
-                {{ form.submit }}
-            </form>
+            <h2>Edit Tasks</h2>
+            <table>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <tr><td>Task ID: </td><td>{{ id }}</td></tr> 
+                    <tr><td>{{ form.name.label }}</td><td>{{ form.name }}</td></tr> 
+                    <tr><td>{{ form.desc.label }}</td><td>{{ form.desc }}</td></tr> 
+                    <tr><td>{{ form.est_time.label }}</td><td>{{ form.est_time }}</td></tr> 
+                    <tr><td>{{ form.price_ph.label }}</td><td>{{ form.price_ph }}</td></tr> 
+                    <tr><td>{{ form.submit }}</td></tr>
+                </form>
+            </table>
         {% endblock body %}
     </body>
 </html> 

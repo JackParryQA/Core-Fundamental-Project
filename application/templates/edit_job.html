@@ -6,24 +6,19 @@
     <body>
         {% extends 'layout.html' %}
         {% block body %}
-            <h1>Edit Job</h1>
-            <form method="POST" action="">
-                {{ form.hidden_tag() }}
-                <br>
-                Job ID: {{ id }}
-                <br><br>
-                {{ form.customer.label }}  {{ form.customer }}
-                <br><br>
-                {{ form.task.label }} {{ form.task }}
-                <br><br>
-                {{ form.start_date.label }} {{ form.start_date }}
-                <br><br>
-                {{ form.complete.label }} {{ form.complete }}
-                <br><br>
-                Total Price: {{ price }}
-                <br><br>
-                {{ form.submit }}
-            </form>
+            <h2>Edit Job</h2>
+            <table>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <tr><td>Job ID:                     </td><td>{{ id }}   </td></tr> 
+                    <tr><td>{{ form.customer.label }}   </td><td>{{ form.customer }}</td></tr>  
+                    <tr><td>{{ form.task.label }}       </td><td>{{ form.task }}</td></tr> 
+                    <tr><td>{{ form.start_date.label }} </td><td>{{ form.start_date }}</td></tr> 
+                    <!-- <tr><td>{{ form.complete.label }}   </td><td>{{ form.complete }}</td></tr>  -->
+                    <tr><td>Total Price:                </td><td>{{ price }}</td></tr>
+                    <tr><td>{{ form.submit }}</td></tr>
+                </form>
+            </table>
         {% endblock body %}
     </body>
 </html>

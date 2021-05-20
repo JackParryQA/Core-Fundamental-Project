@@ -1,3 +1,4 @@
+from ast import Str
 from datetime import date
 from flask.app import Flask
 from sqlalchemy.orm import query
@@ -29,9 +30,10 @@ class AddTaskForm(FlaskForm):
 class AddJobForm(FlaskForm):
     customer = SelectField('Customer:')
     task = SelectField('Task:')
-    start_date = DateField('Start Date:', format='%d-%m-%Y', validators=[DataRequired()])
+    start_date = DateField('Start Date:', format='%d/%m/%Y', validators=[DataRequired()],default=date.today())
     # finish_date = DateField('Finish Date:', format='%d-%m-%Y', default=date.today)
-    complete = SelectField('Job Complete')
+    # complete = SelectField('Job Complete', default=False)
+    complete = StringField('Complete')
     total_price = DecimalField('Total Price:')#, validators=[DataRequired()])#######
     submit = SubmitField('Submit')
 

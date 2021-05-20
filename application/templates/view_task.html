@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Show Task - Task ID {{ task.task_id }}</title>
+    </head>
+
+    <body>
+        {% extends 'layout.html' %}
+        {% block body %}
+            <h2>Tasks</h2>
+            <table  style='border: 1px solid black;'>
+                <tr><td style='padding: 5px;'>Task ID:       </td><td style='padding: 5px;'> {{ task.task_id }} </td></tr>
+                <tr><td style='padding: 5px;'>Name:          </td><td style='padding: 5px;'> {{ task.name }}    </td></tr>
+                <tr><td style='padding: 5px;'>Description:   </td><td style='padding: 5px;'> {{ task.desc }}    </td></tr>
+                <tr><td style='padding: 5px;'>Est Time:      </td><td style='padding: 5px;'> {{ "%.2f"|format(task.est_time) }}</td> </tr>
+                <tr><td style='padding: 5px;'>Price Per Hour:</td><td style='padding: 5px;'> {{ "£%.2f"|format(task.price_ph) }}</td> </tr>
+                <tr>
+                    <td style='padding: 5px;'>
+                        <form action="{{ url_for('EditTask', id=task.task_id) }}">
+                            <input type="submit" value="Edit Task">
+                        </form>
+                    </td>
+                    <td style='padding: 5px;'>
+                        <form action="{{ url_for('Delete',tdb='Tasks',id=task.task_id) }}" style="display: inline-block;">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        {% endblock body %}
+    </body>
+</html>

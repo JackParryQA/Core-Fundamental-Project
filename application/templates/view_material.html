@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>View Material ID {{ mat.material_id }}</title>
+    </head>
+
+    <body>
+        {% extends 'layout.html' %}
+        {% block body %}
+            <h2>{{mat.material_id}} {{ mat.name }}</h2>
+            <table  style='border: 1px solid black;'>
+                <tr><td style='padding: 5px;'>Description: </td><td style='padding: 5px;'> {{ mat.desc }} </td></tr>
+                <tr><td style='padding: 5px;'>Price per:   </td><td style='padding: 5px;'> {{ "£%.2f"|format(mat.price0 }} </td></tr>
+                <tr>
+                    <td style='padding: 5px;'>
+                        <form action="{{ url_for('EditMaterial', id=i.material_id) }}" style="display: inline-block;">
+                            <input type="submit" value="Edit Material">
+                        </form>
+                    </td>
+                    <td style='padding: 5px;'>
+                        <form action="{{ url_for('Delete',tdb='Materials',id=i.material_id) }}" style="display: inline-block;">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+            </table>
+                
+        {% endblock body %}
+    </body>
+</html>

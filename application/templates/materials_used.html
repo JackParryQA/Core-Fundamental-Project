@@ -6,17 +6,16 @@
     <body>
         {% extends 'layout.html' %}
         {% block body %}
-            <form method="POST" action="">
-                {{ form.hidden_tag() }}
-                <br>
-                Job ID {{ job_id }}
-                <br><br>
-                {{ form.material_id.label }} {{ form.material_id }}
-                <br><br>
-                {{ form.quantity.label }} {{ form.quantity }}
-                <br><br>
-                {{ form.submit }}
-            </form>
+        <h2>Add Material to Job</h2>
+            <table>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <tr><td>Job ID </td><td>{{ job_id }}</td></tr> 
+                    <tr><td>{{ form.material_id.label }}</td><td>{{ form.material_id }}</td></tr> 
+                    <tr><td>{{ form.quantity.label }}</td><td>{{ form.quantity }}</td></tr> 
+                    <tr><td>{{ form.submit }}</td></tr>
+                </form>
+            </table>
         {% endblock body %}
     </body>
 </html>

@@ -1,60 +1,97 @@
+{% extends 'layout.html' %}
 <html>
     <head>
         <title>Job Tracker</title>
     </head>
 
     <body>
-        {% extends 'layout.html' %}
         {% block body %}
-            <h1>Jobs</h1>
-            <br><br>
+            <h2>Jobs</h2>
+            {% if jobs|length==0 %}
+                <h4>There are no jobs</h4>
+                <h4>Please create one <a href="{{ url_for('AddJob') }}">here</a></h4>
+            {% else %}
+            
             {% for i in jobs %}
-                <div>
-                    <p>Job ID: {{ i.job_id }}</p> 
-
+                <table>
                     <div>
-                        {% set customer = namespace(c=[]) %}
-                        {% for j in customers %}
-                            {% if i.customer_id == j.customer_id %}
-                                {% set customer.c = j %}
+                        <tr><td>Job ID: </td><td>{{ i.job_id }}</td></tr>
+                        
+                        <div>
+                            {% set customer = namespace(c=[]) %}
+                            {% for j in customers %}
+                                {% if i.customer_id == j.customer_id %}
+                                    {% set customer.c = j %}
+                                {% endif %}
+                            {% endfor %}
+                            {% set c = customer.c %}
+                            <tr><td>Customer: </td><td>{{ c.first_name }} {{ c.last_name }}</td>
+                                <td>
+                                    <form action="{{ url_for('ViewCustomer', id=c.customer_id) }}" style="display: inline-block;">
+                                        <input type="submit" value="View Customer Details">
+                                    </form>
+                                </td>
+                            </tr>
+                            
+                        </div>
+                        
+                        
+                        <div>
+                            {% set task = namespace(t=[]) %}
+                            {% for j in tasks %}
+                                {% if i.task_id == j.task_id %}
+                                    {% set task.t = j %}
+                                {% endif %}
+                            {% endfor %}
+                            {% set t = task.t %}
+                            <tr><td>Task: </td><td>{{ t.name }}</td>
+                            <td><form action="{{ url_for('ViewTask', id=t.task_id) }} "style="display: inline-block;" >
+                                <input type="submit" value="View Task Details">
+                            </form></td></tr>
+                        </div>
+                        <tr><td>Start Date: </td><td>{{ i.start_date }}</td></tr>
+
+                        <tr><td>Complete: </td><td>{{ i.complete }}</td>
+                            <td>
+                            {% if i.complete==False %}
+                                <form action="{{ url_for('CompleteJob', id=i.job_id) }}">
+                                    <input type="submit" value='Complete Job'>
+                                </form>
+                            {% else %}
+                                <form action="{{ url_for('InCompleteJob', id=i.job_id) }}">
+                                    <input type="submit" value='InComplete Job'>
+                                </form>
                             {% endif %}
-                        {% endfor %}
-                        {% set c = customer.c %}
-                        <p>Customer: {{ c.first_name }} {{ c.last_name }}</p>
+                            </td>
+                        </tr>
 
+                        <tr><td>Total Price: </td><td> {{ "£%.2f"|format(i.total_price) }}</td></tr> </p>
+                        <tr>
+                            <td>
+                                <form action="{{ url_for('AddMaterialsUsed', job_id=i.job_id) }}" style="display: inline-block;">
+                                    <input type="submit" value="Add Materials Used">
+                                </form>
+                            </td>
+                            <td>
+                                <form action="{{ url_for('ShowMatsUsed', job_id = i.job_id) }}" style="display: inline-block;">
+                                    <input type="submit" value="Show Materials Used">
+                                </form>
+                            </td>
+                            <td>
+                                <form action="{{ url_for('EditJob', id=i.job_id) }}" style="display: inline-block;">
+                                    <input type="submit" value="Edit Job">
+                                </form>
+                            </td>
+                            <td>
+                                <form action="{{ url_for('Delete',tdb='Jobs',id=i.job_id) }}" style="display: inline-block;">
+                                    <input type="submit" value="Delete">
+                                </form>
+                            </td>
+                        </tr>
                     </div>
-                    {% set task = namespace(t=[]) %}
-                    {% for j in tasks %}
-                        {% if i.task_id == j.task_id %}
-                            {% set task.t = j %}
-                        {% endif %}
-                    {% endfor %}
-                    {% set t = task.t %}
-                    <p>Task: {{ t.name }}</p>
-
-                    <p>Start Date: {{ i.start_date }}</p>
-
-                    <p>Complete: {{ i.complete }}</p>
-
-                    <p>Total Price: £{{ i.total_price }} </p>
-
-                    <form action="{{ url_for('AddMaterialsUsed', job_id=i.job_id) }}" style="display: inline-block;">
-                        <input type="submit" value="Add Materials Used">
-                    </form>
-
-                    <form action="{{ url_for('ShowMatsUsed', job_id = i.job_id) }}" style="display: inline-block;">
-                        <input type="submit" value="Show Materials Used">
-                    </form>
-                    
-                    <form action="{{ url_for('EditJob', id=i.job_id) }}" style="display: inline-block;">
-                        <input type="submit" value="Edit Job">
-                    </form>
-
-                    <form action="{{ url_for('Delete',tdb='Jobs',id=i.job_id) }}" style="display: inline-block;">
-                        <input type="submit" value="Delete">
-                    </form>
-                </div>
+                </table>
             {% endfor %}
+        {% endif %}
         {% endblock body %}
     </body>
 </html>

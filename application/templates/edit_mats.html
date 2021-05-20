@@ -6,22 +6,18 @@
     <body>
         {% extends 'layout.html' %}
         {% block body %}
-            <h1>Edit Material</h1>
-            <form method="POST" action="">
-                {{ form.hidden_tag() }}
-                <br>
-                Material ID: {{ id }}
-                <br><br>
-                {{ form.name.label }} {{ form.name }}
-                <br><br>
-                {{ form.desc.label }} {{ form.desc }}
-                <br><br>
-                {{ form.supplier.label }} {{ form.supplier }}
-                <br><br>
-                {{ form.price.label }} {{ form.price }}
-                <br><br>
-                {{ form.submit }}
-            </form>
+            <h2>Edit Material</h2>
+            <table>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <tr><td>Material ID: </td><td>{{ id }}</td></tr> 
+                    <tr><td>{{ form.name.label }}</td>{ form.name }}<td></td></tr> {
+                    <tr><td>{{ form.desc.label }}</td><td>{{ form.desc }}</td></tr> 
+                    <tr><td>{{ form.supplier.label }}</td>{{ form.supplier }}<td></td></tr> 
+                    <tr><td>{{ form.price.label }}</td><td>{{ form.price }}</td></tr> 
+                    <tr><td>{{ form.submit }}</td></tr>
+                </form>
+            </table>
         {% endblock body %}
     </body>
 </html>

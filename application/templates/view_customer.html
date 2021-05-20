@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>View Customers - ID {{ customer.customer_id }}</title>
+    </head>
+
+    <body>
+        {% extends 'layout.html' %}
+        {% block body %}
+            <h2>{{ customer.customer_id }}  {{ customer.first_name }} {{ customer.last_name}} </h2>
+           
+            <div style=" display: inline-block;padding: 5px;">
+                <table style='border: 1px solid black;'>
+                    <tr><td style='padding: 5px;'>Email:       </td><td style='padding: 5px;'> {{ customer.email }} </td></tr>
+                    <tr><td style='padding: 5px;'>Home No.     </td><td style='padding: 5px;'> {{ customer.home_num }} </td></tr>
+                    <tr><td style='padding: 5px;'>Mobile No.   </td><td style='padding: 5px;'> {{ customer.mobile_num }} </td></tr>
+                    <tr><td style='padding: 5px;'>Address:     </td><td style='padding: 5px;'> {{ customer.address }} </td></tr>
+                    <tr><td style='padding: 5px;'>Town/City:   </td><td style='padding: 5px;'> {{ customer.town_city }}</td></tr>
+                    <tr><td style='padding: 5px;'>County:      </td><td style='padding: 5px;'> {{ customer.county }} </td></tr>
+                    <tr><td style='padding: 5px;'>County:      </td><td style='padding: 5px;'> {{ customer.county }} </td></tr>
+                    <tr><td style='padding: 5px;'>Postcode:    </td><td style='padding: 5px;'> {{ customer.postcode }} </td></tr>
+                    <tr>
+                        <td style='padding: 5px;'>
+                            <form action="{{ url_for('EditCustomer', id=customer.customer_id) }}">
+                                <input type="Submit" value="Edit Customer">
+                            </form> 
+                        </td>
+                        <td style='padding: 5px;'>
+                            <form action="{{ url_for('Delete',tdb='Customers',id=customer.customer_id) }}" style="display: inline-block;">
+                                <input type="submit" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        {% endblock body %}
+    </body>
+</html>
