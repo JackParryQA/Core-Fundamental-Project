@@ -17,6 +17,7 @@ class TestBase(TestCase):
         return app
 
     def setUp(self):
+        db.drop_all()
         db.create_all()
 
         new_customer=Customers(
@@ -176,14 +177,17 @@ class TestAdd(TestBase):
         response = self.client.post(
             url_for('AddJob'),
             data = dict(
-                customer_id=2,
+                customer_id=1,
                 task_id=1,
                 start_date=datetime.strptime('20-05-2021', '%d-%m-%Y'),
                 complete=False
             ),
             follow_redirects=True
         )
-        self.assertIn(b'1', response.data)
+        all_jobs=Jobs.query.all()
+        print(len(all_jobs))
+        self.assertIn(b'False', response.data)
+        self.assertEqual(len(all_jobs), 1)
     
     def test_addmat_post(self):
         response = self.client.post(
@@ -208,7 +212,10 @@ class TestAdd(TestBase):
             ),
             follow_redirects=True
         )
+        all_mats=MaterialsUsed.query.all()
+        print(all_mats)
         self.assertIn(b'1', response.data)
+        self.assertEqual(len(all_mats), 1)
 
 class TestUpdate(TestBase):
     def test_updatecustomer(self):
@@ -280,4 +287,22 @@ class TestUpdate(TestBase):
         )
         self.assertIn(b'2', response.data)
 
+class TestComplete(TestBase):
+    def test_completejob(self):
+        response = self.client.get(url_for('CompleteJob', id=1),follow_redirects=True)
+        job=Jobs.query.get(1)
+        self.assertEqual(job.complete, True)
+    
+    def test_incompletejob(self):
+        response = self.client.get(url_for('InCompleteJob', id=1),follow_redirects=True)
+        job=Jobs.query.get(1)
+        self.assertEqual(job.complete, False)
+        
 
+# class TestDelete(TestBase):
+#     def test_delete_customer(self):
+#         response = self.client.get(url_for('Delete',tdb=Customers, id=1),follow_redirects=True)
+#         # self.assertEqual(response.status_code, 200)
+#         all_customer=Customers.query.all()
+#         print(len(all_customer))
+#         self.assertEqual(len(all_customer),1)

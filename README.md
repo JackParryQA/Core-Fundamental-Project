@@ -58,16 +58,47 @@ The app will allow the user to do the following:
 Below is my Entity Relationship Diagram(ERD) which shows the structure of my database. I have also included my original ERD shows the changes I made to whilst I was developing the app. 
 
 Original ERD:
-![Original ERD](./images/Old ERD.png)
+![Original ERD](./images/Old_ERD.png)
 
 Current Working ERD:
 ![Current Working ERD](./images/ERD.png)
 
+As you can see there is not much change but I thought I was worth including.
 
 ## Risk Assessment
 
 
+## CI Pipeline
+
+For this project we used what is called a CI Pipeline. A CI Pipeline allows for continous integration/delivery. In my case, I will develop code on my local machine which will then be pushed to my code repository which will then be automatically pushed to my CI sever with the use of a webhook to be then automatically installed on a VM.
+
+For the CI Pipeline I will use:
+* Code Development: Python
+* Code Repository: GitHub
+* Project Tracking: Trello
+* Unit Testing: Pytest
+* CI Server: Jenkins
+* Virtual Machine(VM): Google Cloud Platform(GCP)
+
+I also hosted my SQL server on GCP.
+
+Once I have a working and stable version of the app, the app is going to be deployed by gunicorn. Gunicorn is a python web server gateway interface which splits the VM's resources equally which are known as 'workers'. When a user wishes to connect the server, gunicorn assigns a 'worker' to that connection giving them dedicated resources allowing the server to run smoother for all user.
 
 
 ## Testing
 _Had to change add job and update job to allow for test_
+
+
+## Front-end Design
+
+Below is going to be all of the pages for my application. They were all created using simple HTML and Jinja2 and are all a simple design with not much CSS(styling) done.
+
+When the user navigates to the url, they will be taking to the home(index) page. They will see all the links for adding and viewing records. If there is no jobs found the page will prompt you to create one.
+
+![Index with no Jobs](./images/Index_blank.PNG)
+
+Once a job is create it will be displayed on the home page. The price will automatically be calculated when the job is created and when any materials have been added to the job.
+![Index with a job](./images/Index_withJobs.PNG)
+
+
+Clicking the add customer link/button at the top of the page will take you to the add customer 

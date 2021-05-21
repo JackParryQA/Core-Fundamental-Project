@@ -12,7 +12,7 @@ class TestBase(LiveServerTestCase):
         app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///int-test.db",
                 SECRET_KEY='dsfgsegsdgh53rsn',
                 DEBUG=True,
-                WTF_CSRF_ENABLED=False)
+                TESTING=True)
         return app
 
     def setUp(self):
