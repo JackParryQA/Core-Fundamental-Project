@@ -28,7 +28,7 @@ class TestBase(LiveServerTestCase):
         chrome_options.add_argument('--headless')
 
         self.driver = webdriver.Chrome(options=chrome_options)
-
+        db.drop_all()
         db.create_all() # create schema before we try to get the page
 
         self.driver.get(f'http://localhost:{self.TEST_PORT}')
@@ -46,18 +46,12 @@ class TestInt(TestBase):
     # add customer for later
 
     def test_addcustomer_int(self):
-        self.driver.get(url_for('AddTask'))
-        
-        name_input = self.driver.find_element_by_xpath('//*[@id="name"]')
-        name_input.send_keys('Fit Radiator')
-        desc_input = self.driver.find_element_by_xpath('//*[@id="desc"]')
-        desc_input.send_keys('Fit brand new radiator to wall')
-        est_time_input = self.driver.find_element_by_xpath('//*[@id="est_time"]')
-        est_time_input.send_keys('2')
-        price_input = self.driver.find_element_by_xpath('//*[@id="price_ph"]')
-        price_input.send_keys('20')
-        
-        price_input = self.driver.find_element_by_xpath('//*[@id="submit"]').click()
+        self.driver.find_element_by_xpath('/html/body/div[3]/a').click()
+        self.driver.find_element_by_xpath('//*[@id="name"]').send_keys('Fit Radiator')
+        self.driver.find_element_by_xpath('//*[@id="desc"]').send_keys('Fit brand new radiator to wall')
+        self.driver.find_element_by_xpath('//*[@id="est_time"]').send_keys('2')
+        self.driver.find_element_by_xpath('//*[@id="price_ph"]').send_keys('20')
+        self.driver.find_element_by_xpath('//*[@id="submit"]').click()
         task=Tasks.query.first()
         # assert self.driver.current_url == url_for('ShowTasks')
         self.assertEqual(task.name, 'Fit Radiator')
