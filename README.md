@@ -134,9 +134,31 @@ Clicking the 'Show Materials Used' button under a job on the home page will take
 
 ![Show Materials Used Page](./images/ShowMatsUsed.PNG)
 
-Clicking the 'Edit Customer' button under a customer on the Customers Page will take you to a page which will allow the user to edit(update) a customers information, as shown below. Clicking the submit button on that page will take you back to the customers page.
+Clicking the 'Edit Customer' button under a customer on the Customers Page will take you to a page which will allow the user to edit(update) a customers information, as shown below. Clicking the submit button on that page will take you back to the customers page. For some reason the 'not working' will not work not matter what I call from it.
 
 ![Edit Customer Page](./images/EditCustomer.PNG)
+
+Clicking the 'Edit Task' button under a task on the Tasks Page will take you to a page which will allow the user to edit(update) a tasks information, as shown below. Clicking the submit button on that page will take you back to the Tasks page.
+
+![Edit Task Page](./images/EditTask.PNG)
+
+Clicking the 'Edit Material' button under a material on the Materials Page will take you to a page which will allow the user to edit(update) a materials information, as shown below. Clicking the submit button on that page will take you back to the Materials page.
+
+![Edit Material Page](./images/EditMaterial.PNG)
+
+Clicking the 'View Customer Details' button next to customer in a job on the home page will take you to a page which will display the chosen customers information, as shown below. The user can edit and delete from this screen.
+
+![View Customer Page](./images/ViewCustomer.PNG)
+
+Clicking the 'View Task Details' button next to task in a job on the home page will take you to a page which will display the chosen tasks information, as shown below. The user can edit and delete from this screen.
+
+![View Task Page](./images/ViewTask.PNG)
+
+Clicking the 'View Material' button under material on the materials used page will take you to a page which will display the chosen materials information, as shown below. The user can edit and delete from this screen.
+
+![View Material Page](./images/ViewMaterial.PNG)
+
+The delete buttons call a function that deletes the selected data from the database and then redirect you back to where you were.
 
 ## Testing
 
