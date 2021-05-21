@@ -85,10 +85,6 @@ I also hosted my SQL server on GCP.
 Once I have a working and stable version of the app, the app is going to be deployed by gunicorn. Gunicorn is a python web server gateway interface which splits the VM's resources equally which are known as 'workers'. When a user wishes to connect the server, gunicorn assigns a 'worker' to that connection giving them dedicated resources allowing the server to run smoother for all user.
 
 
-## Testing
-_Had to change add job and update job to allow for test_
-
-
 ## Front-end Design
 
 Below is going to be all of the pages for my application. They were all created using simple HTML and Jinja2 and are all a simple design with not much CSS(styling) done.
@@ -97,8 +93,53 @@ When the user navigates to the url, they will be taking to the home(index) page.
 
 ![Index with no Jobs](./images/Index_blank.PNG)
 
-Once a job is create it will be displayed on the home page. The price will automatically be calculated when the job is created and when any materials have been added to the job.
+Once a job is created it will be displayed on the home page. The price will automatically be calculated when the job is created and when any materials have been added to the job.
+
 ![Index with a job](./images/Index_withJobs.PNG)
 
 
-Clicking the add customer link/button at the top of the page will take you to the add customer 
+Clicking the 'Add Customer' link/button at the top of any page will take you to the Add Customer page as seen below, where you can add a new customer.
+
+![Add Customer Page](./images/AddCustomer.PNG)
+
+Clicking the 'Add Task' link/button at the top of any page will take you to the Add Task page as shown below, where you can add a new task.
+
+![Add Task Page](./images/AddTask.PNG)
+
+Clicking the 'Add Material' link/button at the top of any page will take you to the Add Material page as shown below, where you can add a new material.
+
+![Add Material Page](./images/AddMaterial.PNG)
+
+Clicking the 'Add Job' link/button at the top of any page, or on the home page when there are no jobs, will take you to the Add Job page, as shown below, where you can add a new job. The user will select a customer and task from drop down lists. Also, the current date is displayed in the start date input box.
+
+![Add Job Page](./images/AddJob.PNG)
+
+Clicking the 'Add Materials Used' link/button under a job will take you to the Add Materials Used page, as shown below, where you can add a material to a job. The user will select a material from a drop down list and input the quantity they want to add.
+
+![Add Materials Used Page](./images/AddMatsUsed.PNG)
+
+Clicking the 'Customers' link/button, or clicking submit to create a new customer, will take you to a page which displays all of the customers in the database, as shown below. From there you can edit or delete the customers information.
+
+![Show Customers Page](./images/ShowCustomers.PNG)
+
+Clicking the 'Tasks' link/button, or clicking submit to create a new task, will take you to a page which displays all of the tasks in the database, as shown below. From there you can edit or delete the tasks information.
+
+![Show Tasks Page](./images/ShowTasks.PNG)
+
+Clicking the 'Materials' link/button, or clicking submit to create a new material, will take you to a page which displays all of the tasks in the database, as shown below. From there you can edit or delete the materials information.
+
+![Show Materials Page](./images/ShowMaterials.PNG)
+
+Clicking the 'Show Materials Used' button under a job on the home page will take you to a page which displays all of the materials used for a chosen job, as shown below. From there you can edit or delete what materials are used for the job.
+
+![Show Materials Used Page](./images/ShowMatsUsed.PNG)
+
+Clicking the 'Edit Customer' button under a customer on the Customers Page will take you to a page which will allow the user to edit(update) a customers information, as shown below. Clicking the submit button on that page will take you back to the customers page.
+
+![Edit Customer Page](./images/EditCustomer.PNG)
+
+## Testing
+
+Coverage report:
+
+![coverage report](./images/Coverage_report.PNG)
