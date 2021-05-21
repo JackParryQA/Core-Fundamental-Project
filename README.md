@@ -1,5 +1,16 @@
 # Core Fundamental Project
 
+## Contents
+* [Brief](#brief)
+  * [Additional Requirements](#Addition-Requirements)
+  * [My Approach](#My-Approach)
+* [Architecture](#Architecture)
+  * [Database Structure](#Database-Structure)
+  * [CI Pipeline](#CI-Pipeline)
+* [Project Tracking](#Project-Tracking)
+* [Risk Assessment](#Risk-Assessment)
+* [Front-end Design](#Front-end-Design)
+
 ## Brief
 
 For this project, I have been tasked "To create a CRUD application with utilisation of supporting tools,
@@ -65,10 +76,8 @@ Current Working ERD:
 
 As you can see there is not much change but I thought I was worth including.
 
-## Risk Assessment
 
-
-## CI Pipeline
+### CI Pipeline
 
 For this project we used what is called a CI Pipeline. A CI Pipeline allows for continous integration/delivery. In my case, I will develop code on my local machine which will then be pushed to my code repository which will then be automatically pushed to my CI sever with the use of a webhook to be then automatically installed on a VM.
 
@@ -83,6 +92,12 @@ For the CI Pipeline I will use:
 I also hosted my SQL server on GCP.
 
 Once I have a working and stable version of the app, the app is going to be deployed by gunicorn. Gunicorn is a python web server gateway interface which splits the VM's resources equally which are known as 'workers'. When a user wishes to connect the server, gunicorn assigns a 'worker' to that connection giving them dedicated resources allowing the server to run smoother for all user.
+
+## Project Tracking
+
+## Risk Assessment
+
+![Risk Assessment](./images/RiskAssessment.png)
 
 
 ## Front-end Design
