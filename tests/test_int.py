@@ -1,7 +1,7 @@
 from flask.helpers import url_for
 from flask_testing import LiveServerTestCase
 from application import app,db
-# from application.models import Customers,Tasks,Materials,MaterialsUsed,Jobs
+from application.models import Customers,Tasks,Materials,MaterialsUsed,Jobs
 # from datetime import datetime
 from selenium import webdriver
 from urllib.request import urlopen
@@ -50,16 +50,17 @@ class TestInt(TestBase):
         
         name_input = self.driver.find_element_by_xpath('//*[@id="name"]')
         name_input.send_keys('Fit Radiator')
-        # desc_input = self.driver.find_element_by_xpath('//*[@id="desc"]')
-        # desc_input.send_keys('Fit brand new radiator to wall')
-        # est_time_input = self.driver.find_element_by_xpath('//*[@id="est_time"]')
-        # est_time_input.send_keys('2')
-        # price_input = self.driver.find_element_by_xpath('//*[@id="price_ph"]')
-        # price_input.send_keys('20')
+        desc_input = self.driver.find_element_by_xpath('//*[@id="desc"]')
+        desc_input.send_keys('Fit brand new radiator to wall')
+        est_time_input = self.driver.find_element_by_xpath('//*[@id="est_time"]')
+        est_time_input.send_keys('2')
+        price_input = self.driver.find_element_by_xpath('//*[@id="price_ph"]')
+        price_input.send_keys('20')
         
         price_input = self.driver.find_element_by_xpath('//*[@id="submit"]').click()
-
-        assert self.driver.current_url == url_for('ShowTasks')
+        task=Tasks.query.first()
+        # assert self.driver.current_url == url_for('ShowTasks')
+        self.assertEqual(task.name, 'Fit Radiator')
     
     #  def test_create(self):
         # self.driver.get(f'http://localhost:5000/create') # go to /create route
