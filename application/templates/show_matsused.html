@@ -21,11 +21,16 @@
                                 {% set total = j.price*i.quantity %}
                                 <tr><td style='padding: 5px;'>Total Price: </td><td style='padding: 5px;'> {{ "£%.2f"|format(total) }}</td></tr>
                                 <tr>
-                                    <!-- <td style='padding: 5px;'>
+                                    <td style='padding: 5px;'>
+                                        <form action="{{ url_for('ViewMaterial', id=i.material_id) }}" style="display: inline-block;">
+                                                <input type="submit" value="Not working">
+                                        </form>
+                                    </td>  
+                                    <td style='padding: 5px;'>
                                         <form action="{{ url_for('ViewMaterial', id=i.material_id) }}" style="display: inline-block;">
                                                 <input type="submit" value="View Material">
                                         </form>
-                                    </td>     NOT WORKING FOR SOME REASON      -->  
+                                    </td>  
                                
                                     <td style='padding: 5px;'>
                                         <form action="{{ url_for('Delete',tdb='MaterialsUsed',id=i.material_id) }}" style="display: inline-block;">
