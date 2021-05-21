@@ -46,5 +46,28 @@ The app will allow the user to do the following:
   * Quantity
 
 * View and update records from each table
-* Delete a record
-*
+* Delete a record from any of the tables.
+* Additionally, when a record is deleted all records that are linked to that record via foreign key will get deleted. For example, if a Job record was deleted all of the records in the Materials Used table with the same id as the job getting deleted will also be deleted.
+* Also, the user should only have to input and edit the price for the materials and task price per hour. The app will calculate the total cost of the job.
+
+
+## Architecture
+
+### Database Structure
+
+Below is my Entity Relationship Diagram(ERD) which shows the structure of my database. I have also included my original ERD shows the changes I made to whilst I was developing the app. 
+
+Original ERD:
+![Original ERD](./images/Old ERD.png)
+
+Current Working ERD:
+![Current Working ERD](./images/ERD.png)
+
+
+## Risk Assessment
+
+
+
+
+## Testing
+_Had to change add job and update job to allow for test_

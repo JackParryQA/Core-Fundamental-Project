@@ -88,19 +88,19 @@ def AddJob():
         task_id = form.task.data
         start_date = form.start_date.data
         # complete = bool(form.complete.data)
-        temp=Tasks.query.get(task_id)
-        total_price = temp.est_time*temp.price_ph
+        # temp=Tasks.query.get(task_id)
+        # total_price = temp.est_time*temp.price_ph
         if form.validate_on_submit():
             new_job = Jobs(
                 customer_id=customer_id,
                 task_id=task_id,
                 start_date=start_date,
                 complete=False,
-                total_price=total_price
+                total_price=0
             )
             db.session.add(new_job)
             db.session.commit()
-            return redirect(url_for('Index'))
+            return redirect(url_for('UpdateJobPrice',type='add', id=new_job.job_id))
         else:
             print(form.errors)
     return render_template('add_job.html', form = form)
