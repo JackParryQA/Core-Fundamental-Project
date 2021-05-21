@@ -17,7 +17,7 @@ class AddCustomerForm(FlaskForm):
     address = StringField('Address:', validators=[DataRequired()])
     town_city = StringField('Town/City:', validators=[DataRequired()])
     county = StringField('County:', validators=[DataRequired()])
-    postcode = StringField('Postcode;', validators=[DataRequired()])
+    postcode = StringField('Postcode:', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 class AddTaskForm(FlaskForm):
