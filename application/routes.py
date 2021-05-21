@@ -101,8 +101,6 @@ def AddJob():
             db.session.add(new_job)
             db.session.commit()
             return redirect(url_for('UpdateJobPrice',type='add', id=new_job.job_id))
-        else:
-            print(form.errors)
     return render_template('add_job.html', form = form)
 
 @app.route('/add material', methods=['GET', 'POST'])
@@ -301,9 +299,7 @@ def EditMatsUsed(id):
     mat=Materials.query.get(mats.material_id)
     if request.method=='POST':
         quantity=form.quantity.data
-        print(quantity)
         price=quantity*mat.price
-        print(price)
         if form.validate_on_submit():
             mats.quantity=quantity
             mats.price=price
