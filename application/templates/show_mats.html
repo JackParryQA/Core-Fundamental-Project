@@ -8,6 +8,7 @@
         {% block body %}
             <h2>Materials</h2>
             {% for i in mats %}
+            <div style=" display: inline-block;padding: 5px;">
                 <table  style='border: 1px solid black;'>
                     <tr><td style='padding: 5px;'>Material ID: </td><td style='padding: 5px;'> {{ i.material_id }} </td></tr>
                     <tr><td style='padding: 5px;'>Name:        </td><td style='padding: 5px;'> {{ i.name }} </td></tr>
@@ -26,6 +27,7 @@
                         </td>
                     </tr>
                 </table>
+            </div>
             {% endfor %}
                 
         {% endblock body %}

@@ -8,6 +8,7 @@
         {% block body %}
             <h2>Tasks</h2>
             {% for i in tasks %}
+            <div style=" display: inline-block;padding: 5px;">
                 <table  style='border: 1px solid black;'>
                     <tr><td style='padding: 5px;'>Task ID:       </td><td style='padding: 5px;'> {{ i.task_id }} </td></tr>
                     <tr><td style='padding: 5px;'>Name:          </td><td style='padding: 5px;'> {{ i.name }}    </td></tr>
@@ -27,6 +28,7 @@
                         </td>
                     </tr>
                 </table>
+            </div>
             {% endfor %}
         {% endblock body %}
     </body>

@@ -11,6 +11,7 @@
                 {% for i in matsused %} <!-- MaterialsUsed table -->
                     {% for j in mats %} <!-- Materials table -->
                         {% if i.material_id==j.material_id %}
+                        <div style=" display: inline-block;padding: 5px;">
                             <table  style='border: 1px solid black;'>
                                 <tr><td style='padding: 5px;'>Material ID: </td><td style='padding: 5px;'> {{ j.material_id }} </td></tr>
                                 <tr><td style='padding: 5px;'>Name:        </td><td style='padding: 5px;'> {{ j.name }} </td></tr>
@@ -37,6 +38,7 @@
                                     </td>
                                 </tr>
                             </table>
+                        </div>
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
