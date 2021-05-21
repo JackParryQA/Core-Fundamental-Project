@@ -8,11 +8,18 @@ from urllib.request import urlopen
 
 
 class TestBase(LiveServerTestCase):
+    TEST_PORT = 5050 # test port, doesn't need to be open
+
     def create_app(self):
-        app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///int-test.db",
-                SECRET_KEY='dsfgsegsdgh53rsn',
-                DEBUG=True,
-                TESTING=True)
+
+        app.config.update(
+            SQLALCHEMY_DATABASE_URI="sqlite:///test.db",
+            LIVESERVER_PORT=self.TEST_PORT,
+            
+            DEBUG=True,
+            TESTING=True
+        )
+
         return app
 
     def setUp(self):
@@ -28,10 +35,11 @@ class TestBase(LiveServerTestCase):
 
     def tearDown(self):
         self.driver.quit()
+
         db.drop_all()
-    
+
     def test_server_is_up_and_running(self):
-        response = urlopen(url_for('{self.TEST_PORT}'))
+        response = urlopen(f'http://localhost:{self.TEST_PORT}')
         self.assertEqual(response.code, 200)
 
 class TestInt(TestBase):
