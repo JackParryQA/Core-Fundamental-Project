@@ -95,6 +95,11 @@ Once I have a working and stable version of the app, the app is going to be depl
 
 ## Project Tracking
 
+For this project I used a Trello board to track the progress. I have included many user stories, some of which I did not complete because they were out of the scope of the project. Link to [Trello Board](https://trello.com/b/UcIxnnX4/devops-core-fundamental-project).
+
+![Trello Board image](./images/Trello-Board.PNG)
+
+
 ## Risk Assessment
 
 ![Risk Assessment](./images/RiskAssessment.png)
@@ -180,3 +185,15 @@ The delete buttons call a function that deletes the selected data from the datab
 Coverage report:
 
 ![coverage report](./images/Coverage_report.PNG)
+
+
+## Known Issues
+
+* The only issue I know of is a button, which was for viewing the material, on the Show Materials Used page doesn't work no matter what the function of the button is. i.e. ive tried copying and pasting the code for a button that works into the same place and it won't do anything so I've put another view material button next to it and left the 'not working' button there because it will only work with that broken button there.
+
+## Future Improvements
+
+* The first improvement I would make is to make it look better by spending more time on styling(CSS)
+* I would also make another table that contains jobs that have been completed. From there the user will be able to make invoices for the job and bill the customer
+* Introduce a login system
+* Be able to sort and search for records in each table to make information easier and faster to find
