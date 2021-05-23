@@ -23,7 +23,7 @@ class Customers(db.Model):
     town_city = db.Column(db.String(100), nullable=False)
     county = db.Column(db.String(100), nullable=False)
     postcode = db.Column(db.String(10), nullable=False)
-    job = db.relationship('Jobs', backref='job')
+    job = db.relationship('Jobs', backref='jobs')
 
 class Tasks(db.Model):
     task_id = db.Column(db.Integer, primary_key=True)
@@ -31,7 +31,7 @@ class Tasks(db.Model):
     desc = db.Column(db.String(200), nullable=False)
     est_time = db.Column(db.Float(10,2), nullable=False)
     price_ph = db.Column(db.Float(10,2), nullable=False, default=0.00)
-    job = db.relationship('Jobs', backref='job')
+    job = db.relationship('Jobs', backref='jobs')
            
 class Materials(db.Model):
     material_id = db.Column(db.Integer, primary_key=True)
