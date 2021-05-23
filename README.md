@@ -189,6 +189,8 @@ Coverage report:
 
 ![coverage report](./images/Coverage_report.PNG)
 
+When I was making sure everything worked before I submitted the project, I found a small bug where if you update a material record/object and there is no job it will throw an error because it can't find a job when updating the price. I simply fixed this by using an 'if statement'.
+
 
 ## Known Issues
 
