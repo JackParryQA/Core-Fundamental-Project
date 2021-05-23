@@ -153,11 +153,11 @@ Clicking the 'Materials' link/button, or clicking submit to create a new materia
 
 ![Show Materials Page](./images/ShowMaterials.PNG)
 
-Clicking the 'Show Materials Used' button under a job on the home page will take you to a page which displays all of the materials used for a chosen job, as shown below. From there you can edit or delete what materials are used for the job.
+Clicking the 'Show Materials Used' button under a job on the home page will take you to a page which displays all of the materials used for a chosen job, as shown below. From there you can edit or delete what materials are used for the job. For some reason the 'not working' will not work not matter what I call from it. I've mentioned more on this in the know issues section.
 
 ![Show Materials Used Page](./images/ShowMatsUsed.PNG)
 
-Clicking the 'Edit Customer' button under a customer on the Customers Page will take you to a page which will allow the user to edit(update) a customers information, as shown below. Clicking the submit button on that page will take you back to the customers page. For some reason the 'not working' will not work not matter what I call from it.
+Clicking the 'Edit Customer' button under a customer on the Customers Page will take you to a page which will allow the user to edit(update) a customers information, as shown below. Clicking the submit button on that page will take you back to the customers page. 
 
 ![Edit Customer Page](./images/EditCustomer.PNG)
 
@@ -202,3 +202,4 @@ When I was making sure everything worked before I submitted the project, I found
 * I would also make another table that contains jobs that have been completed. From there the user will be able to make invoices for the job and bill the customer
 * Introduce a login system
 * Be able to sort and search for records in each table to make information easier and faster to find
+* Add more validation and error messages to let user know they've input something wrong
