@@ -97,7 +97,7 @@ Once I have a working and stable version of the app, the app is going to be depl
 
 ## Project Tracking
 
-For this project I used a Trello board to track the progress. I have included many user stories, some of which I did not complete because they were out of the scope of the project. Link to [Trello Board](https://trello.com/b/UcIxnnX4/devops-core-fundamental-project).
+For this project I used a Trello board to track the progress. I have included many user stories, some of which I did not complete because they were out of the scope of the project. Link to [Trello Board](https://trello.com/b/UcIxnnX4/devops-core-fundamental-project). Click on the cards to view more detail, such as the user story.
 
 ![Trello Board image](./images/Trello-Board.PNG)
 
