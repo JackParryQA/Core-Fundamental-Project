@@ -358,7 +358,8 @@ def UpdateJobPrice(type,id):
     job=Jobs.query.get(id)
     all_mats=Materials.query.all()
     mats_used=MaterialsUsed.query.filter_by(job_id=id).all()
-    task=Tasks.query.get(job.task_id)
+    if len(Jobs.query.all()):
+        task=Tasks.query.get(job.task_id)
     total_price=0
     for i in mats_used:#MaterialsUsed table
         for j in all_mats:#Materials table
