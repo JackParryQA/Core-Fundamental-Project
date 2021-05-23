@@ -10,6 +10,8 @@
 * [Project Tracking](#Project-Tracking)
 * [Risk Assessment](#Risk-Assessment)
 * [Front-end Design](#Front-end-Design)
+* [Know Issues](#Known-Issues)
+* [Future Improvements](#Future-Improvements)
 
 ## Brief
 
@@ -102,6 +104,7 @@ For this project I used a Trello board to track the progress. I have included ma
 
 ## Risk Assessment
 
+Below is my risk assessment. I have mentioned five possible risks that could occur and mentioned some ways of avoiding these risks. I used the risk assessment matrix with columns 'Likelyhood', 'Impact' & 'Risk Level. The image for this can be found [here](./images/RiskAssessment.png)
 ![Risk Assessment](./images/RiskAssessment.png)
 
 
