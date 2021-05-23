@@ -1,5 +1,16 @@
+from sqlalchemy.orm import backref
 from application import db
 from datetime import date
+
+class Jobs(db.Model):
+    job_id = db.Column(db.Integer, primary_key=True)
+    customer_id = db.Column(db.Integer, db.ForeignKey('customers.customer_id'), nullable=False)
+    task_id = db.Column(db.Integer, db.ForeignKey('tasks.task_id'), nullable=False)
+    start_date = db.Column(db.Date, nullable=False, default=date.today())
+    # finish_date = db.Column(db.Date, nullable=True)
+    complete = db.Column(db.Boolean, nullable=False)
+    materials_used = db.relationship('MaterialsUsed', backref='job')
+    total_price = db.Column(db.Float(10,2), nullable=False, default=0.00)     
 
 class Customers(db.Model):
     customer_id = db.Column(db.Integer, primary_key=True)
@@ -12,6 +23,7 @@ class Customers(db.Model):
     town_city = db.Column(db.String(100), nullable=False)
     county = db.Column(db.String(100), nullable=False)
     postcode = db.Column(db.String(10), nullable=False)
+    job = db.relationship('Jobs', backref='job')
 
 class Tasks(db.Model):
     task_id = db.Column(db.Integer, primary_key=True)
@@ -19,18 +31,8 @@ class Tasks(db.Model):
     desc = db.Column(db.String(200), nullable=False)
     est_time = db.Column(db.Float(10,2), nullable=False)
     price_ph = db.Column(db.Float(10,2), nullable=False, default=0.00)
-
-
-class Jobs(db.Model):
-    job_id = db.Column(db.Integer, primary_key=True)
-    customer_id = db.Column(db.Integer, db.ForeignKey('customers.customer_id'), nullable=False)
-    task_id = db.Column(db.Integer, db.ForeignKey('tasks.task_id'), nullable=False)
-    start_date = db.Column(db.Date, nullable=False, default=date.today())
-    # finish_date = db.Column(db.Date, nullable=True)
-    complete = db.Column(db.Boolean, nullable=False)
-    materials_used = db.relationship('MaterialsUsed', backref='job')
-    total_price = db.Column(db.Float(10,2), nullable=False, default=0.00)                 #need to look how to add price from task and materialsused tables
-
+    job = db.relationship('Jobs', backref='job')
+           
 class Materials(db.Model):
     material_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200), nullable=False)
