@@ -1,4 +1,3 @@
-import re
 from application.forms import AddCustomerForm, AddJobForm, AddMatUsedForm, AddMaterialForm, AddTaskForm, EditMaterialUsedForm
 from flask import render_template, request, redirect, url_for
 from application import app,db
@@ -355,24 +354,26 @@ def Delete(tdb,id):
     
 @app.route('/update price/<type>/<int:id>')
 def UpdateJobPrice(type,id):
-    job=Jobs.query.get(id)
-    all_mats=Materials.query.all()
-    mats_used=MaterialsUsed.query.filter_by(job_id=id).all()
-    # if len(Jobs.query.all()):
-    task=Tasks.query.filter_by(task_id=job.task_id).first()
-    total_price=0
-    for i in mats_used:#MaterialsUsed table
-        for j in all_mats:#Materials table
-            if j.material_id==i.material_id:
-                total_price+=i.quantity*j.price
-    job.total_price=total_price+(task.est_time*task.price_ph)
-    db.session.commit()
-    if type=='del' :
-        return redirect(url_for('ShowMatsUsed',job_id=id))
-    elif type=='add':
-        return redirect(url_for('Index'))
-    elif type=='upd':
-        return redirect(url_for('ShowMats'))
+    if len(Jobs.query.all()):
+        job=Jobs.query.get(id)
+        all_mats=Materials.query.all()
+        mats_used=MaterialsUsed.query.filter_by(job_id=id).all()
+        
+        task=Tasks.query.filter_by(task_id=job.task_id).first()
+        total_price=0
+        for i in mats_used:#MaterialsUsed table
+            for j in all_mats:#Materials table
+                if j.material_id==i.material_id:
+                    total_price+=i.quantity*j.price
+        job.total_price=total_price+(task.est_time*task.price_ph)
+        db.session.commit()
+        if type=='del' :
+            return redirect(url_for('ShowMatsUsed',job_id=id))
+        elif type=='add':
+            return redirect(url_for('Index'))
+        elif type=='upd':
+            return redirect(url_for('ShowMats'))
+    return redirect(url_for('ShowMats'))
 
 
 @app.route('/view customer/<int:id>')
