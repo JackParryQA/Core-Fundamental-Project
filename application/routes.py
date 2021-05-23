@@ -316,27 +316,24 @@ def Delete(tdb,id):
     if tdb=='Customers':
         target=Customers.query.get(id)
         jobs=Jobs.query.filter_by(customer_id=id)
-        if len(jobs)>0:
-            for i in jobs:
-                db.session.delete(i)
+        for i in jobs:
+            db.session.delete(i)
         db.session.delete(target)
         db.session.commit()
         return redirect(url_for('ShowCustomers'))
     elif tdb=='Tasks':
         target=Tasks.query.get(id)
         tasks=Jobs.query.filter_by(task_id=id)
-        if len(tasks)>0:
-            for i in tasks:
-                db.session.delete(i)
+        for i in tasks:
+            db.session.delete(i)
         db.session.delete(target)
         db.session.commit()
         return redirect(url_for('ShowTasks'))
     elif tdb=='Materials':
         target=Materials.query.get(id)
         mats_used=MaterialsUsed.query.filter_by(material_id=id)
-        if len(mats_used)>0:
-            for i in mats_used:
-                db.session.delete(i)
+        for i in mats_used:
+            db.session.delete(i)
         db.session.delete(target)
         db.session.commit()
         return redirect(url_for('ShowMats'))
